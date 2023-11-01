@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Pertemuan 10 PWEB-D</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h1>Kalkulator</h1>
+      <div>
+        <input type="text" v-model="input1" @input="calculate" />
+        <input type="text" v-model="input2" @input="calculate" />
+      </div>
+      <div>
+        <button @click="operation('+')">+</button>
+        <button @click="operation('-')">-</button>
+        <button @click="operation('*')">*</button>
+        <button @click="operation('/')">/</button>
+      </div>
+      <div>
+        <p>Hasil: {{ result }}</p>
+      </div>
+    </div>
+
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          input1: "",
+          input2: "",
+          result: "",
+        },
+        methods: {
+          operation(operator) {
+            const num1 = parseFloat(this.input1);
+            const num2 = parseFloat(this.input2);
+
+            if (!isNaN(num1) && !isNaN(num2)) {
+              switch (operator) {
+                case "+":
+                  this.result = num1 + num2;
+                  break;
+                case "-":
+                  this.result = num1 - num2;
+                  break;
+                case "*":
+                  this.result = num1 * num2;
+                  break;
+                case "/":
+                  this.result = num1 / num2;
+                  break;
+              }
+            } else {
+              this.result = "Error";
+            }
+          },
+          clear() {
+            this.input1 = "";
+            this.input2 = "";
+            this.result = "";
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
